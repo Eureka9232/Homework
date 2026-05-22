@@ -3,6 +3,7 @@ import product from '@/public/images/product-1.png'
 
 type ProductCardProps ={
   name:string;
+  about:string;
   price:number;
   imageSrc:string;
   inStock?:boolean;
@@ -10,7 +11,7 @@ type ProductCardProps ={
 
 
 
-export default function ProductCard({ name, price, imageSrc,inStock=true}:ProductCardProps) {
+export default function ProductCard({ name, price, imageSrc,inStock=true,about}:ProductCardProps) {
   return (
     <div className="max-w-sm rounded-lg border border-gray-200 bg-white">
       
@@ -34,7 +35,7 @@ export default function ProductCard({ name, price, imageSrc,inStock=true}:Produc
         </h5>
 
         <p className="mb-3 font-normal text-gray-700">
-          Ультра редкие акраны который нельзя найти на торговой площадке steam
+          {about}
         </p>
 
         <span className="text-xl font-bold text-blue-600">
