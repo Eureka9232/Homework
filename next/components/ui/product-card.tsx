@@ -1,5 +1,10 @@
+'use client';
+
+import ProductButton from './cartprod';
+import LikeButton from './heartBlue';
 import Image from 'next/image';
 import product from '@/public/images/product-1.png'
+import{ useState }from'react';
 
 type ProductCardProps ={
   name:string;
@@ -7,11 +12,15 @@ type ProductCardProps ={
   price:number;
   imageSrc:string;
   inStock?:boolean;
+  description?: string;
 };
 
 
 
-export default function ProductCard({ name, price, imageSrc,inStock=true,about}:ProductCardProps) {
+export default function ProductCard({ name, price, imageSrc,inStock=true,about,description}:ProductCardProps) {
+  const[isLiked,setIsLiked]=useState (false);
+  const[isDescriptionVisible,setIsDescriptionVisible]=useState (false);
+
   return (
     <div className="max-w-sm rounded-lg border border-gray-200 bg-white">
       
@@ -37,26 +46,31 @@ export default function ProductCard({ name, price, imageSrc,inStock=true,about}:
         <p className="mb-3 font-normal text-gray-700">
           {about}
         </p>
-
+      <div className='flex flex-row justify-between items-center'>
         <span className="text-xl font-bold text-blue-600">
           {price.toLocaleString()} ₽
         </span>
+
+        <LikeButton/>
+
+      </div>
+      <button
+        onClick={()=>setIsDescriptionVisible(!isDescriptionVisible)}
+        className=" text-blue-500 underline"
+        >
+        {isDescriptionVisible?'Скрыть описание':'Показать описание'}
+      </button>
+
+{isDescriptionVisible&& description &&(
+<p className="mt-2 text-gray-500 text-sm">{description}</p>
+)}
+
         <p className={inStock?'text-green-600' : 'text-red-600'}>
         {inStock?'В наличии':'Нет в наличии'}
         </p>
-        <button 
-        className={`mt-2 px-4 py-2 rounded w-full ${
-        inStock
-        ?'bg-blue-500 text-white hover:bg-blue-600'
-        :'bg-gray-300 text-gray-500 cursor-not-allowed'
-        }`}
-        disabled={!inStock}
-        >
-          В корзину
-        </button>
 
-
-
+        <ProductButton
+        inStock={inStock}/>
       </div>
     </div>
   );

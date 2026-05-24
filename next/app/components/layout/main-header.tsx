@@ -11,6 +11,7 @@ return(
 <Link href="/contacts"className="hover:underline">Контакты</Link>
 <Link href="/Adaptiv"className="">Адаптив</Link>
 <Link href="/styleCSS"className="">tailwindcss</Link>
+<Link href="/test"className="">test</Link>
 </nav>
 </header>
 );
